@@ -20,6 +20,8 @@ void Arrow_rand(float px, float py);
 
 void X_rand(float px, float py);
 
+void take_Ball(float px, float py);
+
 void RedCube(float Gx1, float Gy1);
 
 void Gamer1();
@@ -27,4 +29,10 @@ void Gamer1();
 void GreenCube(float Gx2, float Gy2);
 
 void Gamer2();
+
+void Score(void);
+
+void finalScore();
+
+void startGame(void);
 

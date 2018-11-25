@@ -21,11 +21,12 @@ int main(int argc, char** argv){
   game_time = 100;
   timer_id = 10;
   rot = 0;
-  mod11 = 0,no_mod= 0, mod7 = 0, mod5 = 0, mod4 = 0, mod3 = 0;
+  mod11 = 0,no_mod= 0, mod7 = 0, mod5 = 0, mod4 = 0, mod3 = 0, mod13= 0;
   Cube_x=0, Cube_y=0;
   hours = 0.0, timer = 0, time = 10;
   Gx1 = 0.875, Gy1 = 0.875;
   Gx2 = -0.875, Gy2 = -0.875;
+  bonusR = 0, bonusG = 0;
      
   glutKeyboardFunc(on_keyboard);
   glutReshapeFunc(on_reshape);

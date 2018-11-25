@@ -4,7 +4,7 @@ void on_timer(int value){
   if(value!=TIMER_ID)
     return;
   if(game_time > 0){
-    game_time -= 0.1;
+    game_time -= 0.2;
     rot +=1;
     if(hours < 2.5){
       hours+=0.1;
@@ -21,17 +21,18 @@ void on_timer(int value){
   }
   else{
     timer = 0;
-    printf("Kraj igre! \nRED: %d\nGREEN: %d\n", red_num, green_num);
+    game_time = 0;
+    /*printf("Kraj igre! \nRED: %d\nGREEN: %d\n", red_num, green_num);
     if(red_num > green_num){
-      printf("Crveni igrac je pobedio!\n");
+      printf("Crveni igrac je pobedio i osvojio %d bonus poena!\n", bonusR);
       exit(0);
     }else if(green_num > red_num){
-      printf("Zeleni igrac je pobedio!\n");
+      printf("Zeleni igrac je pobedio i osvojio %d bonus poena!\n", bonusG);
       exit(0);
     } else{
       printf("Nereseno je!\n");
       exit(0);
-    }
+    }*/
   }
 }
 
@@ -57,14 +58,23 @@ void on_display(void){
       glMatrixMode(GL_MODELVIEW);
       glLoadIdentity();
       gluLookAt(0, 2.5, 2.5, 0, 5, 0, 0, 1, 0);
-    
+       
       check_position();    
       field();
       RedCube(-Gx1,-Gy1);
       GreenCube(Gx2,Gy2);
-     glShadeModel(GL_SMOOTH);
+      glShadeModel(GL_SMOOTH);
       field_separated();
-
+     
+      if(game_time == 100){
+	startGame();
+      }else{
+	if(game_time > 0){
+	  Score();
+	}else{
+	  finalScore();
+	}
+      }
       if(mod11 == 1){
 	for(i=0; i!=i_rand*2;i=i+2){
 	  glEnable(GL_DEPTH_TEST);

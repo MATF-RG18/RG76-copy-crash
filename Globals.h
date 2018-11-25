@@ -15,7 +15,7 @@ int red_num, green_num;
 
 int i, j, rot, i_rand;
 
-int mod11,no_mod, mod7, mod5, mod4, mod3;
+int mod11,no_mod, mod7, mod5, mod4, mod3, mod13, bonusR, bonusG;
 
 float Cube_x, Cube_y;
 

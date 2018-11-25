@@ -172,6 +172,16 @@ void X_rand(float px, float py){
 
   glTranslatef(-px,-py,0);
 }
+/*iscrtavanje loptica kojima igraci mogu da dobiju bonus poene*/
+void take_Ball(float px, float py){
+  glTranslatef(px,py,0);   
+    glPushMatrix();
+    glColor3f(0,0,0.5);
+    glutSolidSphere(0.8,15,15);
+    glPopMatrix();  
+  glTranslatef(-px,-py,0);
+}
+
 
 
 /*crta se crveni kvadrat ispod igraca 1*/
@@ -227,7 +237,7 @@ void RedCube(float Gx1, float Gy1){
 void Gamer1(){
 
 
-    GLfloat light_position1[] = { -0.3, -0.3, 0, 0 };
+    GLfloat light_position1[] = { -0.3, 0.3, 0, 0 };
     GLfloat light_ambient1[] = { 0.6, 0.0, 0.0, 1 };
     GLfloat light_diffuse1[] = { 0.2, 0.8, 0.15, 1 };
     GLfloat light_specular1[] = { 0.9, 0.2, 0.6, 1 };
@@ -237,10 +247,10 @@ void Gamer1(){
     GLfloat model_specular1[] = { 0.75, 0, 0.9, 1 };
     //GLfloat model_shininess1 = 20;
 
-    glLightfv(GL_LIGHT0,GL_AMBIENT,light_ambient1);
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse1);
-    glLightfv(GL_LIGHT0,GL_SPECULAR,light_specular1);
-    glLightfv(GL_LIGHT0,GL_POSITION,light_position1);
+    glLightfv(GL_LIGHT1,GL_AMBIENT,light_ambient1);
+    glLightfv(GL_LIGHT1,GL_DIFFUSE,light_diffuse1);
+    glLightfv(GL_LIGHT1,GL_SPECULAR,light_specular1);
+    glLightfv(GL_LIGHT1,GL_POSITION,light_position1);
       
     glMaterialfv(GL_FRONT,GL_AMBIENT,model_ambient1);
     glMaterialfv(GL_FRONT,GL_DIFFUSE,model_diffuse1);
@@ -248,7 +258,7 @@ void Gamer1(){
     //glMaterialf(GL_FRONT,GL_SHININESS,model_shininess1);
 
   glEnable(GL_LIGHTING);
-  glEnable(GL_LIGHT0);
+  glEnable(GL_LIGHT1);
   float rot1 = rot * 360 / 24;
   
   glPushMatrix();
@@ -265,7 +275,7 @@ void Gamer1(){
     glTranslatef(Gx1,Gy1,0);
   glPopMatrix();
   
-  glDisable(GL_LIGHT0);
+  glDisable(GL_LIGHT1);
   glDisable(GL_LIGHTING);
 }
 
@@ -323,7 +333,7 @@ void Gamer2(){
   GLfloat light_ambient[] = {0.6,0.5,0.1,0,0};
   GLfloat light_diffuse[] = {0.4,0.2,0.8,0};
   GLfloat light_specular[] = {0.8,1,0,0.5};
-  GLfloat light_position[] = {-0.3,-0.3,0,0};
+  GLfloat light_position[] = {0.3,-0.3,0,0};
 
   GLfloat model_ambient[] = {0.2,0.9, 0.4, 0.2};
   GLfloat model_diffuse[] = {0.1,0.2,0.8,0.4};
@@ -362,4 +372,125 @@ void Gamer2(){
   glDisable(GL_LIGHT0);
   glDisable(GL_LIGHTING);
   
+}
+
+/*funkcija koja pokazuje koje dugme je za pocetak igrice tj ukljucivanje tajmera*/
+void startGame(void){
+glDisable(GL_LIGHTING);
+	char tekst1[256], *p1;
+	sprintf(tekst1, "Pritisnite g za pocetak igrice");
+
+	glPushMatrix();
+			glColor3f(0,0,1);
+			glRasterPos3f(1.5,-3,0);
+			for(p1 = tekst1; *p1!= '\0'; p1++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p1);
+			}
+	glPopMatrix();	
+}
+
+
+/*Funkcija za ispis trenutnog skora tokom trajanja igre.*/
+void Score(void){
+glDisable(GL_LIGHTING);
+	char tekst1[256], *p1;
+	sprintf(tekst1, "Current score: R:G");
+
+	char tekst2[256], *p2;
+	sprintf(tekst2, "%d", red_num);
+
+	char tekst3[256], *p3;
+	sprintf(tekst3, "%d", green_num);
+	glPushMatrix();
+			glColor3f(0,0,1);
+			glRasterPos3f(1.5,-3,0);
+			for(p1 = tekst1; *p1!= '\0'; p1++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p1);
+			}
+	glPopMatrix();
+	
+	char tekst23[256], *p23;
+	sprintf(tekst23, ":");
+	glPushMatrix();
+			glColor3f(0,0,1);
+			glRasterPos3f(-1.6,-3,0);
+			for(p23 = tekst23; *p23!= '\0'; p23++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p23);
+			}
+	glPopMatrix();
+	
+	glPushMatrix();
+			glColor3f(0,0,1);
+			glRasterPos3f(-1.2,-3,0);
+			for(p2 = tekst2; *p2!= '\0'; p2++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p2);
+			}
+	glPopMatrix();
+	
+	
+	glPushMatrix();
+			glColor3f(0,0,1);
+			glRasterPos3f(-1.7,-3,0);
+			for(p3 = tekst3; *p3!= '\0'; p3++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p3);
+			}
+	glPopMatrix();
+	
+}
+
+
+/*funkcija za iscrtavanje konacnog rezultata*/
+void finalScore(void){
+glDisable(GL_LIGHTING);
+	
+	if(red_num > green_num){
+	  
+  	char tekst1[256], *p1;
+	sprintf(tekst1, "Pobedio je crveni igrac!");
+
+	glPushMatrix();
+			glColor3f(1,0,0);
+			glRasterPos3f(1.5,-3,0);
+			for(p1 = tekst1; *p1!= '\0'; p1++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p1);
+			}
+	glPopMatrix();
+	}else if (green_num > red_num){
+	  
+	char tekst2[256], *p2;
+	sprintf(tekst2, "Pobedio je zeleni igrac!");
+	  
+	glPushMatrix();
+			glColor3f(0,1,0);
+			glRasterPos3f(1.5,-3,0);
+			for(p2 = tekst2; *p2!= '\0'; p2++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p2);
+			}
+	glPopMatrix();
+	}else{
+	  
+	char tekst3[256], *p3;
+	sprintf(tekst3, "Nereseno je!");
+	  
+	glPushMatrix();
+			glColor3f(0,0,1);
+			glRasterPos3f(1.5,-3,0);
+			for(p3 = tekst3; *p3!= '\0'; p3++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p3);
+			}
+	glPopMatrix();  
+	}
+	
+	
+	char tekst4[256], *p4;
+	sprintf(tekst4, "Pritisnite ESC za izlazak iz igrice!");
+	
+	  
+	glPushMatrix();
+			glColor3f(0,0,1);
+			glRasterPos3f(1.5,-2,0);
+			for(p4 = tekst4; *p4!= '\0'; p4++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p4);
+			}
+	glPopMatrix();
 }

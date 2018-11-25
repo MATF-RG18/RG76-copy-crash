@@ -71,6 +71,9 @@ void check_random(){
       }else if((rand_num % 3) == 0){
 	mod3 = 1;
 	mod11=mod7=mod5=mod4=no_mod =0;
+      }else if((rand_num % 13) == 0){
+	mod13 = 1;
+	mod11=mod3=mod7=mod5=mod4=no_mod =0;
       }else{
 	no_mod = 1;
 	mod11=mod7=mod5=mod4=mod3 = 0;
@@ -121,6 +124,15 @@ void check_X_rand(float pomX, float pomY, char* s){
   
 }
 
+/*funkcija koja dodaje igracu1- crvenom gratis poene*/
+void check_take_Ball_r(){
+   bonusR++;
+}
+
+/*funkcija koja celenom-igracu2 dodaje bonus poene*/
+void check_take_Ball_g(){
+  bonusG++;
+}
 /* funkcija koja boji ceo red u zavisnosi od toga koja strelica
  * je u pitanju ako je vodotravna boji vodoravno jedan red, a ako
  * je vertikalno onda boji vertikalno */
@@ -180,7 +192,10 @@ void check_position(){
 	  }
 	  if(mod7 == 1 || mod4 == 1){
 	    check_Arrow_rand(-tmp,-tmp2,"red");
-	   }	  
+	   }
+	   if(mod13 == 1){
+	     check_take_Ball_r();
+	  }
 	  }
 	if(Gx2 == tmp && Gy2 == tmp2){
 	   if(mod3 == 1){
@@ -196,6 +211,9 @@ void check_position(){
 	   if(mod7 == 1 || mod4 == 1){
 	    check_Arrow_rand(tmp,tmp2,"green");
 	   }
+	   if(mod13 == 1){
+	     check_take_Ball_g();
+	  }
 	}
     }
 }
