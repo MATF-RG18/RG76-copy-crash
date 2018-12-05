@@ -5,12 +5,12 @@
 #include <string.h>
 #include "Calbacks.h"
 #include "Globals.h"
+#include "SOIL.h"
 
 int main(int argc, char** argv){
 
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);  
-
 
   glutInitWindowSize(400,400);
   glutInitWindowPosition(100,100);
@@ -27,13 +27,20 @@ int main(int argc, char** argv){
   Gx1 = 0.875, Gy1 = 0.875;
   Gx2 = -0.875, Gy2 = -0.875;
   bonusR = 0, bonusG = 0;
-     
+  
   glutKeyboardFunc(on_keyboard);
   glutReshapeFunc(on_reshape);
   glutDisplayFunc(on_display);
-  glClearColor(0, 0, 0, 0);
+ 
 
+  slika_pozadine=SOIL_load_OGL_texture("universe.png",SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+    if(slika_pozadine==0){
+      printf("Nije ucitana slika\n");   
+    }
+  
+  glClearColor(0, 0, 0, 0); 
   glLineWidth(1);
+    
   glutMainLoop();
 
 

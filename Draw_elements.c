@@ -386,7 +386,8 @@ glDisable(GL_LIGHTING);
 			for(p1 = tekst1; *p1!= '\0'; p1++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p1);
 			}
-	glPopMatrix();	
+	glPopMatrix();
+	  
 }
 
 

@@ -1,10 +1,12 @@
 #include "Calbacks.h"
+#include "SOIL.h"
+
 
 void on_timer(int value){
   if(value!=TIMER_ID)
     return;
   if(game_time > 0){
-    game_time -= 0.2;
+    game_time -= 0.5;
     rot +=1;
     if(hours < 2.5){
       hours+=0.1;
@@ -58,14 +60,35 @@ void on_display(void){
       glMatrixMode(GL_MODELVIEW);
       glLoadIdentity();
       gluLookAt(0, 2.5, 2.5, 0, 5, 0, 0, 1, 0);
-       
+
+      	 glPushMatrix();   
+	    glEnable(GL_TEXTURE_2D);
+		glRotatef(91, 1, 0, 0); 
+	   glBegin(GL_QUADS);
+		glBindTexture(GL_TEXTURE_2D,slika_pozadine);
+		glNormal3f(0, 1, 0);
+		    glTexCoord2f(0, 0);
+		    glVertex3f(-5, -17, 0);
+		    glTexCoord2f(1, 0);
+		    glVertex3f(30, -20, 0);
+		    glTexCoord2f(1, 1);
+		    glVertex3f(30, 20, 0);
+		    glTexCoord2f(0, 1);
+		    glVertex3f(-5, 15, 0);
+		
+	    glEnd();
+
+		glDisable(GL_TEXTURE_2D);
+
+	 glPopMatrix();      
+      
       check_position();    
       field();
       RedCube(-Gx1,-Gy1);
       GreenCube(Gx2,Gy2);
       glShadeModel(GL_SMOOTH);
-      field_separated();
-     
+      field_separated();      
+      
       if(game_time == 100){
 	startGame();
       }else{
@@ -73,6 +96,7 @@ void on_display(void){
 	  Score();
 	}else{
 	  finalScore();
+	  
 	}
       }
       if(mod11 == 1){
@@ -130,6 +154,8 @@ void on_keyboard(unsigned char key, int x, int y){
     switch(key) { 
       case 27:
       exit(0);
+      break;
+      
       case 'g':
 	printf("Pritisnuto je dugne G, mozete poceti sa igrom.\n");
 	if(!timer){
@@ -142,6 +168,9 @@ void on_keyboard(unsigned char key, int x, int y){
       break;
       /*Tasteri za kretanje igraca 1(crveni) - 4(levo)6(desno)8(gore)5(dole)*/
       case '6':
+	if(timer == 0){
+	  break;
+	}
 	Gx1 = Gx1 + 0.25;
 	if(Gx1 > 0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx1 == Cube_x && Gy1 == Cube_y)){
 	  Gx1 = Gx1 - 0.25;
@@ -152,6 +181,9 @@ void on_keyboard(unsigned char key, int x, int y){
 	
 	break;
       case '4':
+	if(timer == 0){
+	  break;
+	}
 	Gx1 = Gx1 - 0.25;
 	if(Gx1 < -0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx1 == Cube_x && Gy1 == Cube_y)){
 	  Gx1 = Gx1 + 0.25;
@@ -161,6 +193,9 @@ void on_keyboard(unsigned char key, int x, int y){
 	}
 	break;
       case '8':
+	if(timer == 0){
+	  break;
+	}
 	Gy1 = Gy1 + 0.25;
 	if(Gy1 > 0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx1 == Cube_x && Gy1 == Cube_y)){
 	  Gy1 = Gy1 - 0.25;
@@ -170,6 +205,9 @@ void on_keyboard(unsigned char key, int x, int y){
 	}
 	break;
       case '5':
+	if(timer == 0){
+	  break;
+	}
 	Gy1 = Gy1 - 0.25;
 	if(Gy1 < -0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx1 == Cube_x && Gy1 == Cube_y)){
 	  Gy1 = Gy1 + 0.25;
@@ -181,6 +219,9 @@ void on_keyboard(unsigned char key, int x, int y){
       
 /*Tasteri za kretanje igraca 2(zeleni) - a(levo)d(desno)w(gore)s(dole)*/
       case 'd':
+	if(timer == 0){
+	  break;
+	}
 	Gx2 = Gx2 + 0.25;
 	if(Gx2 > 0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx2 == Cube_x && Gy2 == Cube_y)){
 	  Gx2 = Gx2 - 0.25;
@@ -190,6 +231,9 @@ void on_keyboard(unsigned char key, int x, int y){
 	}
       break;
       case 'a':
+	if(timer == 0){
+	  break;
+	}
 	Gx2 = Gx2 - 0.25;
 	if(Gx2 < -0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx2 == Cube_x && Gy2 == Cube_y)){
 	  Gx2 = Gx2 + 0.25;
@@ -199,7 +243,10 @@ void on_keyboard(unsigned char key, int x, int y){
 	}
 	break;
       case 'w':
-	  Gy2 = Gy2 + 0.25;
+	if(timer == 0){
+	  break;
+	}
+	Gy2 = Gy2 + 0.25;
 	if(Gy2 > 0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx2 == Cube_x && Gy2 == Cube_y)){
 	  Gy2 = Gy2 - 0.25;
 	}
@@ -208,6 +255,9 @@ void on_keyboard(unsigned char key, int x, int y){
 	}
 	break;
       case 's':
+	if(timer == 0){
+	  break;
+	}
 	Gy2 = Gy2 - 0.25;
 	if(Gy2 < -0.875 || (Gx1 == Gx2 && Gy1 == Gy2) || (Gx2 == Cube_x && Gy2 == Cube_y)){ 
 	  Gy2 = Gy2 + 0.25;

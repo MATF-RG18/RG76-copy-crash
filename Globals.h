@@ -6,6 +6,7 @@
 #define TIMER_INTERVAL 100
 #define MAX 129
 #define PI 3.14
+#define FILENAME "universe.bmp"
 
 float game_time;
 
@@ -26,4 +27,8 @@ float Gx1, Gy1;
 float Gx2, Gy2;
 
 float niz_r[MAX], niz_g[MAX], niz_rand[MAX];
+
+static GLuint names[1];
+
+GLuint slika_pozadine;
 

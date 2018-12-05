@@ -1,6 +1,5 @@
-
 CC  	= gcc
-CCLIBS	= -lGL -lGLU -lglut 
+CCLIBS	= -lGL -lGLU -lglut -lSOIL
 CFLAGS	= -lm
 PROGRAM	= copyCrash
 OBJ 	= 		 	 \
@@ -8,7 +7,8 @@ OBJ 	= 		 	 \
 	Calbacks.o	 	 \
 	Draw_elements.o  	 \
 	Check.o			 \
-
+	
+	
 VPATH 	= src
 
 
