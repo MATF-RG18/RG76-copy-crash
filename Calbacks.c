@@ -60,25 +60,25 @@ void on_display(void){
       glMatrixMode(GL_MODELVIEW);
       glLoadIdentity();
       gluLookAt(0, 2.5, 2.5, 0, 5, 0, 0, 1, 0);
-
+      
       	 glPushMatrix();   
 	    glEnable(GL_TEXTURE_2D);
-		glRotatef(91, 1, 0, 0); 
+		glRotatef(-60, 1, 0, 0); 
 	   glBegin(GL_QUADS);
 		glBindTexture(GL_TEXTURE_2D,slika_pozadine);
 		glNormal3f(0, 1, 0);
 		    glTexCoord2f(0, 0);
-		    glVertex3f(-5, -17, 0);
+		    glVertex3f(-5, -5, 0);
 		    glTexCoord2f(1, 0);
-		    glVertex3f(30, -20, 0);
+		    glVertex3f(5, -5, 0);
 		    glTexCoord2f(1, 1);
-		    glVertex3f(30, 20, 0);
+		    glVertex3f(5, 5, 0);
 		    glTexCoord2f(0, 1);
-		    glVertex3f(-5, 15, 0);
+		    glVertex3f(-5, 5, 0);
 		
 	    glEnd();
 
-		glDisable(GL_TEXTURE_2D);
+	glDisable(GL_TEXTURE_2D);
 
 	 glPopMatrix();      
       

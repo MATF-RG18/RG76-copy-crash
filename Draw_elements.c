@@ -235,8 +235,7 @@ void RedCube(float Gx1, float Gy1){
 /*igrac broj 1 -crvena sfera, napravljen u koorinatnom 
  *pocetku i zatim transliran na pocetnu poziciju*/
 void Gamer1(){
-
-
+  
     GLfloat light_position1[] = { -0.3, 0.3, 0, 0 };
     GLfloat light_ambient1[] = { 0.6, 0.0, 0.0, 1 };
     GLfloat light_diffuse1[] = { 0.2, 0.8, 0.15, 1 };
@@ -381,7 +380,7 @@ glDisable(GL_LIGHTING);
 	sprintf(tekst1, "Pritisnite g za pocetak igrice");
 
 	glPushMatrix();
-			glColor3f(0,0,1);
+			glColor3f(1,1,1);
 			glRasterPos3f(1.5,-3,0);
 			for(p1 = tekst1; *p1!= '\0'; p1++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p1);
@@ -403,7 +402,7 @@ glDisable(GL_LIGHTING);
 	char tekst3[256], *p3;
 	sprintf(tekst3, "%d", green_num);
 	glPushMatrix();
-			glColor3f(0,0,1);
+			glColor3f(1,1,1);
 			glRasterPos3f(1.5,-3,0);
 			for(p1 = tekst1; *p1!= '\0'; p1++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p1);
@@ -413,7 +412,7 @@ glDisable(GL_LIGHTING);
 	char tekst23[256], *p23;
 	sprintf(tekst23, ":");
 	glPushMatrix();
-			glColor3f(0,0,1);
+			glColor3f(1,1,1);
 			glRasterPos3f(-1.6,-3,0);
 			for(p23 = tekst23; *p23!= '\0'; p23++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p23);
@@ -421,7 +420,7 @@ glDisable(GL_LIGHTING);
 	glPopMatrix();
 	
 	glPushMatrix();
-			glColor3f(0,0,1);
+			glColor3f(1,1,1);
 			glRasterPos3f(-1.2,-3,0);
 			for(p2 = tekst2; *p2!= '\0'; p2++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p2);
@@ -430,7 +429,7 @@ glDisable(GL_LIGHTING);
 	
 	
 	glPushMatrix();
-			glColor3f(0,0,1);
+			glColor3f(1,1,1);
 			glRasterPos3f(-1.7,-3,0);
 			for(p3 = tekst3; *p3!= '\0'; p3++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p3);
@@ -474,7 +473,7 @@ glDisable(GL_LIGHTING);
 	sprintf(tekst3, "Nereseno je!");
 	  
 	glPushMatrix();
-			glColor3f(0,0,1);
+			glColor3f(1,1,1);
 			glRasterPos3f(1.5,-3,0);
 			for(p3 = tekst3; *p3!= '\0'; p3++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p3);
@@ -488,7 +487,7 @@ glDisable(GL_LIGHTING);
 	
 	  
 	glPushMatrix();
-			glColor3f(0,0,1);
+			glColor3f(1,1,1);
 			glRasterPos3f(1.5,-2,0);
 			for(p4 = tekst4; *p4!= '\0'; p4++){
 					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p4);

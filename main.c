@@ -12,7 +12,7 @@ int main(int argc, char** argv){
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);  
 
-  glutInitWindowSize(400,400);
+  glutInitWindowSize(600,433);
   glutInitWindowPosition(100,100);
   glutCreateWindow(argv[0]);
 
@@ -33,7 +33,7 @@ int main(int argc, char** argv){
   glutDisplayFunc(on_display);
  
 
-  slika_pozadine=SOIL_load_OGL_texture("universe.png",SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+  slika_pozadine=SOIL_load_OGL_texture("deixis_darksky.png",SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
     if(slika_pozadine==0){
       printf("Nije ucitana slika\n");   
     }
