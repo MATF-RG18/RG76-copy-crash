@@ -5,36 +5,29 @@
 void on_timer(int value){
   if(value!=TIMER_ID)
     return;
-  if(game_time > 0){
-    game_time -= 0.5;
-    rot +=1;
-    if(hours < 2.5){
-      hours+=0.1;
+  if(pause !=1){
+    if(game_time > 0){
+      game_time -= 0.5;
+      rot +=1;
+      if(hours < 2.5){
+	hours+=0.1;
+      }
+      else{
+	check_random();
+	draw_rand_elements();
+	  hours = 0;
+	}
+      if(timer){
+	glutTimerFunc(TIMER_INTERVAL,on_timer,TIMER_ID);
+      }
+      glutPostRedisplay();
     }
     else{
-      check_random();
-      draw_rand_elements();
-	hours = 0;
-      }
-    if(timer){
-      glutTimerFunc(TIMER_INTERVAL,on_timer,TIMER_ID);
+      timer = 0;
+      game_time = 0;
     }
-    glutPostRedisplay();
-  }
-  else{
+  }else{
     timer = 0;
-    game_time = 0;
-    /*printf("Kraj igre! \nRED: %d\nGREEN: %d\n", red_num, green_num);
-    if(red_num > green_num){
-      printf("Crveni igrac je pobedio i osvojio %d bonus poena!\n", bonusR);
-      exit(0);
-    }else if(green_num > red_num){
-      printf("Zeleni igrac je pobedio i osvojio %d bonus poena!\n", bonusG);
-      exit(0);
-    } else{
-      printf("Nereseno je!\n");
-      exit(0);
-    }*/
   }
 }
 
@@ -81,14 +74,14 @@ void on_display(void){
 	glDisable(GL_TEXTURE_2D);
 
 	 glPopMatrix();      
-      
+          
       check_position();    
       field();
       RedCube(-Gx1,-Gy1);
       GreenCube(Gx2,Gy2);
       glShadeModel(GL_SMOOTH);
       field_separated();      
-      
+
       if(game_time == 100){
 	startGame();
       }else{
@@ -98,7 +91,7 @@ void on_display(void){
 	  finalScore();
 	  
 	}
-      }
+      }  
       if(mod11 == 1){
 	for(i=0; i!=i_rand*2;i=i+2){
 	  glEnable(GL_DEPTH_TEST);
@@ -141,14 +134,15 @@ void on_display(void){
       Gamer1();
       Gamer2();
     glDisable(GL_DEPTH_TEST);
-
+  
     glRotatef(180,0,1,0);
     glRotatef(-90,1,0,0);
+    
   glutSwapBuffers();
 }
 
 /* funkcija on keyboard koja pokrece igricu pritiskom na G i izlazi iz nje pritiskom na esc. 
- * Takodje odredjuje pomeranje igraca i njihove koordinate proverava */
+ * Takodje odredjuje pomeranje igraca i njihove koordinate proverava  i dugme za pauzu */
 void on_keyboard(unsigned char key, int x, int y){
     
     switch(key) { 
@@ -161,7 +155,11 @@ void on_keyboard(unsigned char key, int x, int y){
 	if(!timer){
 	  glutTimerFunc(10, on_timer, 0);
 	  timer = 1;
+	  pause = 0;
 	}
+	break;
+      case 'p':
+	pause = 1;
 	break;
       case 'e':
 	printf("Pritisnuto je dugne E,kraj igre. izaci sa ECS.\n");

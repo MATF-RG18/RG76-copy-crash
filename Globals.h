@@ -14,7 +14,7 @@ float timer_id;
 
 int red_num, green_num;
 
-int i, j, rot, i_rand;
+int i, j, rot, i_rand, pause;
 
 int mod11,no_mod, mod7, mod5, mod4, mod3, mod13, bonusR, bonusG;
 
@@ -28,7 +28,6 @@ float Gx2, Gy2;
 
 float niz_r[MAX], niz_g[MAX], niz_rand[MAX];
 
-static GLuint names[1];
-
 GLuint slika_pozadine;
-
+    
+  
