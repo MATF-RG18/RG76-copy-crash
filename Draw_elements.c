@@ -502,3 +502,17 @@ void finalScore(void){
 			}
 	glPopMatrix();
 }
+
+void pause_print(void){
+	char tekst1[256], *p1;
+	sprintf(tekst1, "Pause");
+
+	glPushMatrix();
+			glColor3f(1,1,1);
+			glRasterPos3f(1.5,-3,0);
+			for(p1 = tekst1; *p1!= '\0'; p1++){
+					glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *p1);
+			}
+	glPopMatrix();
+	  
+}

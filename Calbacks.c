@@ -82,6 +82,9 @@ void on_display(void){
       glShadeModel(GL_SMOOTH);
       field_separated();      
 
+   
+      
+      
       if(game_time == 100){
 	startGame();
       }else{

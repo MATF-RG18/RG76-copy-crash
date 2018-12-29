@@ -35,3 +35,5 @@ void Score(void);
 void finalScore();
 
 void startGame(void);
+
+void pause_print(void);
